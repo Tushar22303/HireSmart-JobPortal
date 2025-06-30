@@ -106,9 +106,13 @@ cd jobportal_project
 
 python -m venv .venv
 
-# On Mac: source env/bin/activate
+# On Mac:
 
-# On Windows: .venv\Scripts\activate
+source env/bin/activate
+
+# On Windows:
+
+.venv\Scripts\activate
 
 <!-- ------------------------------------------------------- -->
 
