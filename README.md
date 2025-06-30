@@ -50,31 +50,6 @@ Ideal for beginner to intermediate developers looking to showcase real-world Dja
 
 ---
 
----
-
-<!-- ------------------------------------------------------- -->
-
-## 🚀 Project Structure
-
-jobportal_project/
-│
-├── manage.py
-├── .env
-├── requirements.txt
-├── .venv/
-│
-│
-├── jobportal_project/ ← Core settings and URLs
-├── accounts/ <- app -> register, login, logout, etc...
-├── core/ <- app -> home page, about page, etc...
-├── jobs/ <- app -> job_list, post_job, job_detail, apply_job, etc...
-│
-├── media/ ← Uploaded resumes, profile images
-├── static/ ← Optional static files (CSS/JS)
-├── templates/ ← Base and shared HTML templates
-
----
-
 <!-- ------------------------------------------------------- -->
 
 # Media Configuration and Static Configuration
