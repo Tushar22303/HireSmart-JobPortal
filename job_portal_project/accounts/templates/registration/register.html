@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<h2>Register</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    <label>Username:</label>
+    {{ form.username }}
+    {{ form.username.errors }}
+    <br>
+    <label>Email:</label>
+    {{ form.email }}
+    {{ form.email.errors }}
+    <br>
+    
+    <label>Password:</label>
+    {{ form.password1 }}
+    {{ form.password1.errors }}
+    <br>
+    
+    <label>Confirm Password:</label>
+    {{ form.password2 }}
+    {{ form.password2.errors }}
+    
+    <br>
+    <label>Role:</label>
+    {{ form.role }}
+    {{ form.role.errors }}
+    <br>
+    
+    <div id="employer-fields">
+        <h4>Company Details (for Employers)</h4>
+        
+        <label>Company Name:</label>
+        {{ form.company_name }}
+        {{ form.company_name.errors }}
+        <br>
+        
+        <label>Company Location:</label>
+        {{ form.company_location }}
+        {{ form.company_location.errors }}
+        <br>
+        
+        <label>Company Email:</label>
+        {{ form.company_email }}
+        {{ form.company_email.errors }}
+        <br>
+        
+        <label>Company Phone:</label>
+        {{ form.company_contact }}
+        {{ form.company_contact.errors }}
+        <br>
+        
+        <label>Company Website:</label>
+        {{ form.company_website }}
+        {{ form.company_website.errors }}
+        <br>
+    </div>
+    
+    <br>
+    <button type="submit">Register</button>
+</form>
+
+<p>Already have an account? <a href="{% url 'login_view' %}">Login here</a>.</p>
+
+{% endblock %}
