@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+
+{% block title %}HireSmart - Home Page{% endblock %}
+
+{% load static %}
+{% block navbar %}
+  {% include "header.html" %}
+{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="relative bg-cover bg-center bg-no-repeat min-h-[90vh] flex items-center justify-center text-center" style="background-image: url('{% static "bg_image.jpg" %}');">
+  <div class="absolute inset-0 bg-black/40 dark:bg-black/60"></div>
+
+  <div class="relative z-10 max-w-3xl px-6 py-16 text-white">
+    <h1 class="text-4xl md:text-5xl font-extrabold mb-4">
+      Empowering Careers, Connecting Talent
+    </h1>
+    <p class="text-lg md:text-xl mb-6 text-gray-200">
+      Discover your next opportunity or find the perfect hire — all in one place.
+    </p>
+    <div class="flex flex-col md:flex-row gap-4 justify-center">
+      <a href="#" class="px-6 py-3 dark:bg-gray-900 hover:bg-blue-900 text-white rounded-lg shadow-xl/30-lg transition">
+        Browse Jobs
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-16 bg-gray-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-bold text-center text-gray-700 mb-12">Why HireSmart?</h2>
+    <div class="grid gap-10 md:grid-cols-3">
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-xl/30">
+        <h3 class="text-xl font-semibold text-gray-800 dark:text-white">For Job Seekers</h3>
+        <p class="mt-2 text-gray-600 dark:text-gray-300">Create your profile, upload your resume, and apply to jobs with ease.</p>
+      </div>
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-xl/30">
+        <h3 class="text-xl font-semibold text-gray-800 dark:text-white">For Employers</h3>
+        <p class="mt-2 text-gray-600 dark:text-gray-300">Post jobs, manage applicants, and find the right fit faster.</p>
+      </div>
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-xl/30">
+        <h3 class="text-xl font-semibold text-gray-800 dark:text-white">Smart Matching</h3>
+        <p class="mt-2 text-gray-600 dark:text-gray-300">Our intelligent system connects the right talent with the right opportunity.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class='text-gray-800'>
+
+<section class="py-16 bg-gray-100">
+  <div class="max-w-6xl mx-auto px-4 text-center">
+    <h2 class="text-3xl font-bold text-gray-700  mb-10">How It Works</h2>
+    <div class="grid md:grid-cols-2 gap-12 text-left">
+      <div class='bg-white dark:bg-gray-800 p-6 rounded-xl shadow-xl/30'>
+        <div class='flex items-center gap-4 text-left'>
+          <img src="{% static "job-search.png" %}" alt="Job Seeker Icon" class='h-20 w-20'>
+          <h3 class="text-2xl font-semibold text-gray-700 dark:text-white mb-2">For Job Seekers</h3>
+        </div>
+        <ul class="list-disc pl-6 text-gray-400 dark:text-gray-400 space-y-2">
+          <li>Create an account and build your profile</li>
+          <li>Upload your resume/CV</li>
+          <li>Search and apply for jobs instantly</li>
+          <li>Track your applications in the dashboard</li>
+        </ul>
+      </div>
+      <div class='bg-white dark:bg-gray-800 p-6 rounded-xl shadow-xl/30'>
+        <div class='flex items-center gap-4 text-left'>
+          <img src="{% static "human-resources.png" %}" alt="Job Seeker Icon" class='h-20 w-20'>
+          <h3 class="text-2xl font-semibold text-gray-700 dark:text-white mb-2">For Employer</h3>
+        </div>
+        <ul class="list-disc pl-6 text-gray-400 dark:text-gray-400 space-y-2">
+          <li>Register as an employer and set up your company profile</li>
+          <li>Post job listings with requirements</li>
+          <li>Manage applicants through your dashboard</li>
+          <li>Hire the best talent efficiently</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Split Image & Text Section -->
+<section class="py-20 bg-white dark:bg-gray-800">
+  <div class="max-w-6xl mx-auto px-6 lg:flex lg:items-center lg:gap-16">
+    
+    <!-- Image Side -->
+    <div class="lg:w-1/2 mb-12 lg:mb-0">
+      <img src="{% static 'image_1.jpg' %}" alt="Team working" class="rounded-xl shadow-lg w-full object-cover">
+    </div>
+
+    <!-- Text Side -->
+    <div class="lg:w-1/2">
+      <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-4">Why Choose HireSmart?</h2>
+      <p class="text-gray-600 dark:text-gray-300 mb-6">
+        HireSmart is built with simplicity, intelligence, and modern workflows in mind. Whether you’re a job seeker
+        looking for a dream career or a recruiter searching for top-tier talent — we've got your back.
+      </p>
+      <ul class="space-y-3 text-gray-700 dark:text-gray-300">
+        <li class="flex items-start gap-2">
+          <span class="text-blue-600">✓</span> Smart job-matching algorithms
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-blue-600">✓</span> Easy application tracking
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-blue-600">✓</span> Personalized dashboards
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-blue-600">✓</span> Built-in resume upload and parsing
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- Trusted by Companies Section -->
+<section class="py-16 bg-gray-100 ">
+  <div class="max-w-6xl mx-auto px-4 text-center">
+    <h2 class="text-2xl md:text-3xl font-bold text-gray-700">
+      Trusted by Startups & Enterprises Alike
+    </h2>
+    <p class="mb-10 text-gray-600 dark:text-gray-600 mt-3">Leading companies rely on HireSmart to find top talent efficiently.</p>
+
+    <!-- Logo Grid -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 items-center justify-center">
+      <img src="{% static 'google.png' %}" alt="Company 1" class="h-12 mx-auto">
+      <img src="{% static 'deloitte.png' %}" alt="Company 5" class="h-12 mx-auto">
+      <img src="{% static 'Infosys.png' %}" alt="Company 3" class="h-12 mx-auto ">
+      <img src="{% static 'pinterest.png' %}" alt="Company 4" class="h-12 mx-auto ">
+      <img src="{% static 'meta.png' %}" alt="Company 2" class="h-12 mx-auto ">
+      <img src="{% static 'flipkart.png' %}" alt="Company 6" class="h-12 mx-auto ">
+      <img src="{% static 'ibm.png' %}" alt="Company 7" class="h-12 mx-auto ">
+    </div>
+  </div>
+</section>
+
+
+{% endblock %}

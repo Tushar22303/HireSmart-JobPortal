@@ -8,10 +8,21 @@
     {% csrf_token %}
     {{ form.non_field_errors }}
 
+    <label>Firstname:</label>
+    {{ form.first_name }}
+    {{ form.first_name.errors }}
+    <br>
+
+    <label>Lastname:</label>
+    {{ form.last_name }}
+    {{ form.last_name.errors }}
+    <br>
+    
     <label>Username:</label>
     {{ form.username }}
     {{ form.username.errors }}
     <br>
+
     <label>Email:</label>
     {{ form.email }}
     {{ form.email.errors }}

@@ -1,0 +1,46 @@
+{% extends "base.html" %} 
+{% load static %}
+
+{% block navbar %}
+<header class="bg-white dark:bg-gray-800 shadow">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      
+      <!-- Logo -->
+      <div class="flex-shrink-0 text-xl font-bold text-gray-800 dark:text-white">
+        <a href="{% url "home_page" %}">
+          <img src="{% static "Job_portal_logo.png" %}" alt="HireSmart Logo" class='h-10 w-auto'>
+        </a>
+      </div>
+
+      <!-- Navigation Links -->
+      <div class="hidden md:flex space-x-6 items-center">
+        <a href="{% url "home_page" %}" class="text-gray-700 dark:text-gray-300 hover:underline">Home</a>
+        {% if user.is_authenticated %}
+          {% if user.userprofile.role == 'employer' %}
+            <a href="#" class="text-gray-700 dark:text-gray-300 hover:underline">Post Jobs</a>
+            <a href="#" class="text-gray-700 dark:text-gray-300 hover:underline">My Posted Jobs</a>
+          {% elif user.userprofile.role == 'job_seeker' %}  
+            <a href="#" class="text-gray-700 dark:text-gray-300 hover:underline">Browse Jobs</a>
+            <a href="#" class="text-gray-700 dark:text-gray-300 hover:underline">Applied Jobs</a>
+          {% endif %}
+          <a href="{% url "logout_view" %}" class="text-red-500 hover:underline">Logout</a>
+        {% else %}
+          <a href="#" class="text-gray-700 dark:text-gray-300 hover:underline">Browse Jobs</a>
+          <a href="{% url "login_view" %}" class="text-gray-700 dark:text-gray-300 hover:underline">Login</a>
+          <a href="{% url "register" %}" class="text-gray-700 dark:text-gray-300 hover:underline">Register</a>
+        {% endif %}
+      </div>
+
+      <!-- Dark Mode Toggle -->
+      <div class="flex items-center">
+        <button id="theme-toggle" class="text-gray-700 dark:text-gray-300 focus:outline-none">
+          🌙
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+{% endblock %}

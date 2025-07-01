@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 
 # User Registration Form
 class CustomUserRegistrationForm(UserCreationForm):
+    first_name = forms.CharField(max_length=100, required=True)
+    last_name = forms.CharField(max_length=100,required=True)
     email = forms.EmailField(required=True)
     role = forms.ChoiceField(choices=UserProfile._meta.get_field('role').choices, required=True)
 
@@ -18,7 +20,7 @@ class CustomUserRegistrationForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'role', 'password1', 'password2', 'company_name', 'company_location', 'company_email', 'company_contact', 'company_website']
+        fields = ['first_name', 'last_name', 'username', 'email', 'role', 'password1', 'password2', 'company_name', 'company_location', 'company_email', 'company_contact', 'company_website']
 
     def clean(self):
         cleaned_data = super().clean()
