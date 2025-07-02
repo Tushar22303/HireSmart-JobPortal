@@ -6,13 +6,14 @@
 {% block navbar %}
   {% include "header.html" %}
 {% endblock %}
+  
 
 {% block content %}
 
 <!-- Hero Section -->
 <section class="relative bg-cover bg-center bg-no-repeat min-h-[90vh] flex items-center justify-center text-center" style="background-image: url('{% static "bg_image.jpg" %}');">
   <div class="absolute inset-0 bg-black/40 dark:bg-black/60"></div>
-
+  
   <div class="relative z-10 max-w-3xl px-6 py-16 text-white">
     <h1 class="text-4xl md:text-5xl font-extrabold mb-4">
       Empowering Careers, Connecting Talent
@@ -27,6 +28,7 @@
     </div>
   </div>
 </section>
+
 
 <!-- Features Section -->
 <section class="py-16 bg-gray-100">
@@ -49,8 +51,11 @@
   </div>
 </section>
 
+
 <hr class='text-gray-800'>
 
+
+{% comment %} How t Works section {% endcomment %}
 <section class="py-16 bg-gray-100">
   <div class="max-w-6xl mx-auto px-4 text-center">
     <h2 class="text-3xl font-bold text-gray-700  mb-10">How It Works</h2>
@@ -92,7 +97,7 @@
     <div class="lg:w-1/2 mb-12 lg:mb-0">
       <img src="{% static 'image_1.jpg' %}" alt="Team working" class="rounded-xl shadow-lg w-full object-cover">
     </div>
-
+    
     <!-- Text Side -->
     <div class="lg:w-1/2">
       <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-4">Why Choose HireSmart?</h2>
@@ -115,7 +120,7 @@
         </li>
       </ul>
     </div>
-
+    
   </div>
 </section>
 
@@ -127,7 +132,7 @@
       Trusted by Startups & Enterprises Alike
     </h2>
     <p class="mb-10 text-gray-600 dark:text-gray-600 mt-3">Leading companies rely on HireSmart to find top talent efficiently.</p>
-
+    
     <!-- Logo Grid -->
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 items-center justify-center">
       <img src="{% static 'google.png' %}" alt="Company 1" class="h-12 mx-auto">
@@ -142,4 +147,85 @@
 </section>
 
 
+<hr class='text-gray-800'>
+
+<!-- Testimonials Slider Section -->
+<section class="py-20 bg-gray-100">
+  <div class="max-w-6xl mx-auto px-6 text-center">
+    <h2 class="text-3xl font-bold text-gray-700  mb-2">What Our Users Say</h2>
+    <p class="text-gray-600 dark:text-gray-400 mb-12">
+      Real feedback from job seekers and employers who trust HireSmart.
+    </p>
+    
+    <!-- Swiper -->
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        
+        <!-- Slide 1 -->
+        <div class="swiper-slide bg-gray-50 dark:bg-gray-900 p-6 rounded-xl shadow text-left flex flex-col items-center">
+          <img src="{% static 'user_1.jpg' %}" alt="User 1" class="w-25 h-25 rounded-full object-cover mb-4 border-2 border-gray-500 mx-auto">
+          <p class="text-gray-600 dark:text-gray-300 mb-4 text-center">“HireSmart made my job hunt feel effortless. I landed a role in just two weeks!”</p>
+          <p class="font-semibold text-gray-800 dark:text-gray-500 text-end">— Anjali Tiwari</p>
+          <p class="font-semibold text-gray-800 dark:text-gray-500 text-end">Software Engineer</p>
+        </div>
+        
+        <!-- Slide 2 -->
+        <div class="swiper-slide bg-gray-50 dark:bg-gray-900 p-6 rounded-xl shadow text-left flex flex-col items-center">
+          <img src="{% static 'user_2.jpg' %}" alt="User 2" class="w-25 h-25 rounded-full object-cover mb-4 border-2 border-gray-500 mx-auto">
+          <p class="text-gray-600 dark:text-gray-300 mb-4 text-center">“The dashboard is intuitive, and I get high-quality applicants every time.”</p>
+          <p class="font-semibold text-gray-800 dark:text-gray-500 text-end">— Joy Leo</p>
+          <p class="font-semibold text-gray-800 dark:text-gray-500 text-end">HR Manager</p>
+        </div>
+        
+        <!-- Slide 3 -->
+        <div class="swiper-slide bg-gray-50 dark:bg-gray-900 p-6 rounded-xl shadow text-left flex flex-col items-center">
+          <img src="{% static 'user_5.jpg' %}" alt="User 5" class="w-25 h-25 rounded-full object-cover mb-4 border-2 border-gray-500 mx-auto">
+          <p class="text-gray-600 dark:text-gray-300 mb-4 text-center">“HireSmart connects talent with opportunity in a way no other platform does.”</p>
+          <p class="font-semibold text-gray-800 dark:text-gray-500 text-end">— Sneha Dariya</p>
+          <p class="font-semibold text-gray-800 dark:text-gray-500 text-end">UI/UX Designer</p>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="swiper-slide bg-gray-50 dark:bg-gray-900 p-6 rounded-xl shadow text-left flex flex-col items-center">
+          <img src="{% static 'user_6.jpg' %}" alt="User 6" class="w-25 h-25 rounded-full object-cover mb-4 border-2 border-gray-500 mx-auto">
+          <p class="text-gray-600 dark:text-gray-300 mb-4 text-center">“I love the clean UI and quick application process. 5 stars!”</p>
+          <p class="font-semibold text-gray-800 dark:text-gray-500 text-end">— Andrina Luis</p>
+          <p class="font-semibold text-gray-800 dark:text-gray-500 text-end">Data Analyst</p>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="swiper-slide bg-gray-50 dark:bg-gray-900 p-6 rounded-xl shadow text-left flex flex-col items-center">
+          <img src="{% static 'user_4.jpg' %}" alt="User 4" class="w-25 h-25 rounded-full object-cover mb-4 border-2 border-gray-500 mx-auto">
+          <p class="text-gray-600 dark:text-gray-300 mb-4 text-center">“Super easy to navigate and great job matches. Highly recommend.”</p>
+          <p class="font-semibold text-gray-800 dark:text-gray-500 text-end">— Imran Khan</p>
+          <p class="font-semibold text-gray-800 dark:text-gray-500 text-end">AI Engineer</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <script>
+      const swiper = new Swiper(".swiper", {
+        loop: true,
+        autoplay: {
+          delay: 5000,
+          disableOnInteraction: false,
+        },
+        spaceBetween: 20,
+        slidesPerView: 1,
+        breakpoints: {
+          768: { slidesPerView: 2 },
+          1024: { slidesPerView: 3 },
+        },
+      });
+    </script>
+
+
+{% endblock %}
+
+
+{% block footer %}
+  {% include "footer.html" %}
 {% endblock %}

@@ -60,26 +60,10 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     messages.info(request, "You have been logged out")
-    return redirect('register')
+    return redirect('home_page')
 
 
 # Dashboard View
 @login_required
 def dashboard(request):
-    profile = request.user.userprofile
-    if profile.role == "employer":
-        return render(request, 'registration/employer_dashboard.html')
-    else:
-        return render(request, 'registration/jobseeker_dashboard.html')
-    
-
-# # Employer Dashboard
-# @login_required
-# def dashboard_employer(request):
-#     return render(request, 'registration/employer_dashboard.html')
-
-
-# # JobSeeker Dashboard
-# @login_required
-# def dashboard_job_seeker(request):
-#     return render(request, 'registration/jobseeker_dashboard.html')
+    return render(request, 'core/home_page.html')

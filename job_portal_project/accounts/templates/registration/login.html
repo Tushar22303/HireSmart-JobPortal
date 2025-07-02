@@ -2,20 +2,46 @@
 {% load static %}
 {% block content %}
 
-<h2>Login</h2>
+<section class="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+  
+  <div class="w-full max-w-4xl bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden grid grid-cols-1 md:grid-cols-2">
+    
+    <!-- Left Image Side -->
+    <div class="hidden md:block">
+      <img src="{% static 'login_page_image.jpg' %}" alt="Login" class="h-full w-full object-cover">
+    </div>
 
-<form method="POST">
-    {% csrf_token %}
+    <!-- Right Form Side -->
+    <div class="p-10">
+      <h2 class="text-3xl font-bold text-center text-gray-800 dark:text-white mb-6">Welcome Back!</h2>
 
-    <label>Username:</label>
-    <input type="text" name="username" required>
+      <form method="POST" class="space-y-5">
+        {% csrf_token %}
+        
+        <div>
+          <label class="block text-gray-700 dark:text-gray-200 mb-1">Username</label>
+          <input type="text" name="username" required
+            class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-800 dark:text-white">
+        </div>
 
-    <label>Password:</label>
-    <input type="password" name="password" required>
+        <div>
+          <label class="block text-gray-700 dark:text-gray-200 mb-1">Password</label>
+          <input type="password" name="password" required
+            class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-800 dark:text-white">
+        </div>
 
-    <button type="submit">Login</button>
-</form>
+        <button type="submit"
+          class="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition">
+          Login
+        </button>
+      </form>
 
-<p>Don’t have an account? <a href="{% url 'register' %}">Register here</a>.</p>
+      <p class="mt-4 text-center text-sm text-gray-600 dark:text-gray-400">
+        Don’t have an account?
+        <a href="{% url 'register' %}" class="text-blue-600 hover:underline">Register here</a>.
+      </p>
+    </div>
+  </div>
+</section>
 
 {% endblock %}
