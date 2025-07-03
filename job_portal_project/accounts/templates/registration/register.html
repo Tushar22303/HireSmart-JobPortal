@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
+
+{% block title %}HireSmart - Register{% endblock %}
+
 {% block content %}
 
 <a href="{% url "home_page" %}" class='absolute top-10 left-10 text-blue-700 underline'> 
@@ -76,31 +79,31 @@
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label class="block text-gray-700 dark:text-gray-200 mb-1">Company Name</label>
-              <input type="text" name="company_name" required
+              <input type="text" name="company_name"
                 class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-800 dark:text-white">
             </div>
 
             <div>
               <label class="block text-gray-700 dark:text-gray-200 mb-1">Company Location</label>
-              <input type="text" name="company_location" required
+              <input type="text" name="company_location" 
                 class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-800 dark:text-white">
             </div>
 
             <div>
               <label class="block text-gray-700 dark:text-gray-200 mb-1">Company Email</label>
-              <input type="email" name="company_email" required
+              <input type="email" name="company_email" 
                 class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-800 dark:text-white">
             </div>
 
             <div>
               <label class="block text-gray-700 dark:text-gray-200 mb-1">Company Contact</label>
-              <input type="text" name="company_contact" required
+              <input type="text" name="company_contact" 
                 class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-800 dark:text-white">
             </div>
 
             <div>
               <label class="block text-gray-700 dark:text-gray-200 mb-1">Company Website (optional)</label>
-              <input type="text" name="company_website" required
+              <input type="text" name="company_website" 
                 class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-800 dark:text-white">
             </div>
           </div>

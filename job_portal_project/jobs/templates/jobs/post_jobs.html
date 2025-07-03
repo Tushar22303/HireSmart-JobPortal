@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}HireSmart - Post Job{% endblock %}
+
+{% block navbar %}
+  {% include "header.html" %}
+{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-br from-gray-300 via-gray-500 to-gray-700 flex items-center justify-center py-12 px-4">
+  <div class="bg-white shadow-2xl rounded-3xl w-full max-w-2xl p-10">
+
+    <!-- Heading -->
+    <div class="flex justify-between items-center mb-8">
+      <h2 class="text-2xl font-bold text-gray-800">Post a Job</h2>
+      <a href="{% url 'dashboard' %}" class="text-orange-500 font-medium hover:underline">Back to Dashboard</a>
+    </div>
+
+    <!-- Form Start -->
+    <form method="POST" class="space-y-6">
+      {% csrf_token %}
+      
+      {% if form.errors %}
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
+          <strong class="font-bold">Error!</strong>
+          <span class="block sm:inline">Please correct the errors below.</span>
+        </div>
+      {% endif %}
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Job Title -->
+        <div>
+          <label class="block text-gray-700 mb-1">Job Title</label>
+          {{ form.job_title }}
+        </div>
+
+        <!-- Job Location -->
+        <div>
+          <label class="block text-gray-700 mb-1">Job Location</label>
+          {{ form.job_location }}
+        </div>
+
+        <!-- Salary -->
+        <div>
+          <label class="block text-gray-700 mb-1">Salary (Optional)</label>
+          {{ form.salary }}
+        </div>
+
+        <!-- Job Type -->
+        <div>
+          <label class="block text-gray-700 mb-1">Job Type</label>
+          {{ form.job_type }}
+        </div>
+
+        <!-- Job Description -->
+        <div class="md:col-span-2">
+          <label class="block text-gray-700 mb-1">Job Description</label>
+          {{ form.job_description }}
+        </div>
+
+        <!-- Requirements -->
+        <div class="md:col-span-2">
+          <label class="block text-gray-700 mb-1">Requirements</label>
+          {{ form.requirements }}
+        </div>
+
+        <!-- Company Name -->
+        <div>
+          <label class="block text-gray-700 mb-1">Company Name</label>
+          {{ form.company_name }}
+        </div>
+
+        <!-- Company Website -->
+        <div>
+          <label class="block text-gray-700 mb-1">Company Website (Optional)</label>
+          {{ form.company_website }}
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div>
+        <button type="submit"
+          class="w-full hover:cursor-pointer bg-gray-900 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg shadow transition duration-200">
+          Post Job
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -16,12 +16,12 @@
       <!-- Navigation Links -->
       <div class="hidden md:flex space-x-8 items-center">
         <a href="{% url "home_page" %}" class="text-gray-700 dark:text-gray-300 hover:underline">Home</a>
+        <a href="#" class="text-gray-700 dark:text-gray-300 hover:underline">Browse Jobs</a>
         {% if user.is_authenticated %}
           {% if user.userprofile.role == 'employer' %}
-            <a href="#" class="text-gray-700 dark:text-gray-300 hover:underline">Post Jobs</a>
-            <a href="#" class="text-gray-700 dark:text-gray-300 hover:underline">My Posted Jobs</a>
+            <a href="{% url "post_jobs" %}" class="text-gray-700 dark:text-gray-300 hover:underline">Post Jobs</a>
+            <a href="{% url "my_posted_jobs" %}" class="text-gray-700 dark:text-gray-300 hover:underline">My Posted Jobs</a>
           {% elif user.userprofile.role == 'job_seeker' %}  
-            <a href="#" class="text-gray-700 dark:text-gray-300 hover:underline">Browse Jobs</a>
             <a href="#" class="text-gray-700 dark:text-gray-300 hover:underline">Applied Jobs</a>
           {% endif %}
           <a href="#" class="text-gray-300 border-2 px-2 py-1 rounded-full">
@@ -29,7 +29,6 @@
           </a>
           <a href="{% url "logout_view" %}" class="text-red-500 hover:underline">Logout</a>
         {% else %}
-          <a href="#" class="text-gray-700 dark:text-gray-300 hover:underline">Browse Jobs</a>
           <a href="{% url "login_view" %}" class="text-gray-700 dark:text-gray-300 hover:underline">Login</a>
           <a href="{% url "register" %}" class="text-gray-700 dark:text-gray-300 hover:underline">Register</a>
         {% endif %}

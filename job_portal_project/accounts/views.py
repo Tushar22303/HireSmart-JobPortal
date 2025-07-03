@@ -1,24 +1,28 @@
-from django.shortcuts import redirect, render
-from .forms import CustomUserRegistrationForm
-from .models import UserProfile
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from .models import UserProfile
+from .forms import CustomUserRegistrationForm
 from django.contrib.auth.decorators import login_required
 
 
-# register view
+# -----------------------------------
+# Register View
+# -----------------------------------
 def register(request):
     if request.method == "POST":
         form = CustomUserRegistrationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
+            user.first_name = form.cleaned_data['first_name']
+            user.last_name = form.cleaned_data['last_name']
             user.email = form.cleaned_data['email']
             user.save()
 
             # Save the Profile
             role = form.cleaned_data['role']
             profile = user.userprofile
-            profile.role = role
+            profile.role = role.lower()
 
             if role == "employer":
                 profile.company_name = form.cleaned_data['company_name']
