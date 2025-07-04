@@ -18,7 +18,7 @@ class Jobs(models.Model):
     job_description = models.TextField()
     job_location = models.CharField(max_length=100)
     job_type = models.CharField(max_length=100, choices=JOB_TYPE_CHOICE)
-    salary = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    salary = models.CharField(max_length=100, blank=True, null=True)
     requirements = models.TextField()
     company_name = models.CharField(max_length=100)
     company_website = models.URLField(blank=True, null=True)
