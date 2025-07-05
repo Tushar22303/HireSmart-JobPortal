@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Jobs
 from .forms import Post_Job_Form
@@ -76,5 +76,6 @@ def browse_jobs(request):
 # View Job Detail 
 # ==================================
 @login_required
-def job_details(request):
-    return render(request, 'jobs/job_detail.html')
+def job_details(request, job_id):
+    job = get_object_or_404(Jobs, id=job_id)
+    return render(request, 'jobs/job_detail.html', {'job':job})
