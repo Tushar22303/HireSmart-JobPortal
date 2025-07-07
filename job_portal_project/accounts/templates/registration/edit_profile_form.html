@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load form_tags %}
+
+{% block title %}Edit Profile - HireSmart{% endblock %}
+
+{% block navbar %}
+    {% include "header.html" %}
+{% endblock %}
+
+{% block content %}
+<section class="min-h-screen py-12 bg-gradient-to-br from-gray-300 via-gray-500 to-gray-700">
+  <div class="max-w-3xl mx-auto px-4">
+    <div class="bg-white/80 backdrop-blur-md p-10 rounded-3xl shadow-2xl border border-white/30 transition-all duration-300">
+
+      <div class="flex items-center justify-between border-b pb-3 mb-6">
+            <h2 class="text-2xl font-bold text-gray-800">Edit Profile Details</h2>
+            <a href="{% url 'profile_view' %}" class="text-blue-600 hover:underline hover:text-blue-800 transition duration-200">
+                ← Back to Profile
+            </a>
+        </div>
+
+      <form method="POST" enctype="multipart/form-data" class="space-y-8">
+        {% csrf_token %}
+
+        <!-- User Basic Info -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="block mb-2 text-sm font-semibold text-gray-700">First Name</label>
+            {{ user_form.first_name|add_class:"w-full px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400" }}
+          </div>
+          <div>
+            <label class="block mb-2 text-sm font-semibold text-gray-700">Last Name</label>
+            {{ user_form.last_name|add_class:"w-full px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400" }}
+          </div>
+          <div class="md:col-span-2">
+            <label class="block mb-2 text-sm font-semibold text-gray-700">Email</label>
+            {{ user_form.email|add_class:"w-full px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400" }}
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <hr class="border-t border-gray-300">
+
+        <!-- Bio & Contact -->
+        <div>
+          <label class="block mb-2 text-sm font-semibold text-gray-700">Bio</label>
+          {{ profile_form.bio|add_class:"w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-400" }}
+        </div>
+        <div>
+          <label class="block mb-2 text-sm font-semibold text-gray-700">Contact Number</label>
+          {{ profile_form.contact_number|add_class:"w-full px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-400" }}
+        </div>
+
+        <!-- Employer Fields -->
+        {% if role == 'employer' %}
+        <div class="pt-6 border-t border-gray-300">
+          <h3 class="text-lg font-bold text-gray-800 mb-4">Company Information</h3>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="block mb-2 text-sm font-semibold text-gray-700">Company Name</label>
+              {{ profile_form.company_name|add_class:"w-full px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-400" }}
+            </div>
+            <div>
+              <label class="block mb-2 text-sm font-semibold text-gray-700">Company Email</label>
+              {{ profile_form.company_email|add_class:"w-full px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-400" }}
+            </div>
+            <div>
+              <label class="block mb-2 text-sm font-semibold text-gray-700">Company Contact</label>
+              {{ profile_form.company_contact|add_class:"w-full px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-400" }}
+            </div>
+            <div>
+              <label class="block mb-2 text-sm font-semibold text-gray-700">Company Location</label>
+              {{ profile_form.company_location|add_class:"w-full px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-400" }}
+            </div>
+            <div class="md:col-span-2">
+              <label class="block mb-2 text-sm font-semibold text-gray-700">Company Website</label>
+              {{ profile_form.company_website|add_class:"w-full px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-400" }}
+            </div>
+          </div>
+        </div>
+        {% endif %}
+
+        <!-- Submit Button -->
+        <div class="text-center">
+          <button type="submit" class="dark:bg-gray-900 hover:bg-gray-700 hover:cursor-pointer text-white font-semibold py-3 px-8 rounded-full shadow-md hover:shadow-lg transition-all duration-300">
+            Save Changes
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

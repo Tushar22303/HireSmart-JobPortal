@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load form_tags %}
+
+{% block title %}HireSmart - Additional Data{% endblock %}
+
+{% block navbar %}
+    {% include "header.html" %}
+{% endblock %}
+
+{% block content %}
+<section class='bg-gradient-to-br from-gray-300 via-gray-500 to-gray-700 min-h-screen pt-10'>
+    <div class="max-w-2xl mx-auto bg-white shadow-xl rounded-lg p-8">
+        <div class="flex items-center justify-between border-b pb-3 mb-6">
+            <h2 class="text-2xl font-bold text-gray-800">Additional Profile Details</h2>
+            <a href="{% url 'profile_view' %}" class="text-blue-600 hover:underline hover:text-blue-800 transition duration-200">
+                ← Back to Profile
+            </a>
+        </div>
+
+        
+        <form method="POST" enctype="multipart/form-data" class="space-y-6">
+            {% csrf_token %}
+
+            <!-- Profile Picture -->
+            {% if form.profile_picture %}
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Profile Picture</label>
+                {{ form.profile_picture|add_class:"block w-full border border-gray-300 rounded-md shadow-sm p-2" }}
+            </div>
+            {% endif %}
+
+            <!-- Contact Number -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Contact Number</label>
+                {{ form.contact_number|add_class:"block w-full border border-gray-300 rounded-md shadow-sm p-2" }}
+            </div>
+
+            <!-- Bio -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Bio</label>
+                {{ form.bio|add_class:"block w-full border border-gray-300 rounded-md shadow-sm p-2" }}
+            </div>
+
+            <!-- Resume -->
+            {% if form.resume %}
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Resume (PDF or DOC)</label>
+                {{ form.resume|add_class:"block w-full border border-gray-300 rounded-md shadow-sm p-2" }}
+            </div>
+            {% endif %}
+
+            <!-- Submit Button -->
+            <div class="">
+                <button type="submit"
+                    class="bg-gray-900 hover:bg-gray-700 hover:cursor-pointer text-white font-semibold py-2 px-4 rounded-md transition duration-200">
+                    Save Details
+                </button>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

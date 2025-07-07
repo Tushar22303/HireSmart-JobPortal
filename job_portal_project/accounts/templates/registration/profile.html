@@ -1,2 +1,131 @@
 {% extends "base.html" %}
+{% load static %}
+{% block title %}HireSmart - My Profile{% endblock %}
 
+{% block navbar %}
+  {% include "header.html" %}
+{% endblock %}
+
+{% block content %}
+<section class="bg-gradient-to-br from-gray-300 via-gray-500 to-gray-700 min-h-screen py-10">
+  <div class="max-w-3xl mx-auto px-4">
+    <div class="bg-gray-100 rounded-3xl shadow-2xl p-8">
+      
+      <!-- Header -->
+      <div class="flex justify-between items-center mb-10">
+        <h2 class="text-3xl font-extrabold text-gray-800">My Profile</h2>
+
+        <!-- Dropdown Button -->
+        <div class="relative inline-block text-left" id="dropdown-container">
+          <button id="menu-button"
+            class="inline-flex items-center gap-2 rounded-lg bg-gray-100 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-200 focus:outline-none"
+            aria-haspopup="true">
+            <i class="fa-solid fa-gear text-lg"></i>
+          </button>
+
+          <!-- Dropdown Menu -->
+          <div id="dropdown-menu"
+            class="absolute right-0 z-20 mt-2 w-56 rounded-xl bg-white shadow-xl ring-1 ring-gray-300 hidden">
+            <div class="py-2 text-sm text-gray-700">
+              <a href="{% url 'additional_profile_data' %}" class="block px-4 py-2 hover:bg-gray-100">Additional Data</a>
+              <a href="{% url "edit_profile_view" %}" class="block px-4 py-2 hover:bg-gray-100">Edit Profile</a>
+              <a href="{% url "delete_account" %}" class="block px-4 py-2 text-red-600 hover:bg-red-50" role='menuitem'>Delete Account</a>
+              <form method="POST" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="w-full text-left px-4 py-2 hover:bg-gray-100 hover:cursor-pointer">Logout</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Profile Info Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Profile Image -->
+        <div>
+          <div class="w-40 h-40 rounded-full overflow-hidden border-4 border-white shadow-lg">
+            {% if user.userprofile.profile_picture %}
+              <img src="{{ user.userprofile.profile_picture.url }}" alt="Profile Picture" class="w-full h-full object-cover">
+            {% else %}
+              <div class="w-full h-full bg-gray-300 flex items-center justify-center text-gray-600 font-bold">
+                No Image
+              </div>
+            {% endif %}
+          </div>
+          <h3 class="text-2xl mt-2 font-bold text-indigo-800">{{ user.get_full_name }}</h3>
+          
+        </div>
+
+        <!-- User Information -->
+        <div class="md:col-span-2 space-y-4">
+          <div>
+            <p><span class="font-bold text-indigo-800 capitalize">Role:</span> {{ user.userprofile.get_role_display }}</p>
+          </div>
+
+          <div class="grid grid-cols-1 gap-4 text-sm text-gray-700">
+            <p><span class="font-bold text-indigo-800">Username:</span> {{ user.username }}</p>
+            <p><span class="font-bold text-indigo-800">Email:</span> {{ user.email }}</p>
+            {% if user.userprofile.contact_number %}
+              <p><span class="font-bold text-indigo-800">Contact:</span> {{ user.userprofile.contact_number }}</p>
+            {% endif %}
+          </div>
+          {% if user.userprofile.bio %}
+            <div class="mt-3">
+              <h4 class="font-bold text-indigo-800">Bio</h4>
+              <p class="text-gray-600 mt-1">{{ user.userprofile.bio }}</p>
+            </div>
+          {% endif %}
+
+          {% if user.userprofile.resume %}
+            <div class="mt-4">
+              <h4 class="font-bold text-indigo-800">Resume</h4>
+              <a href="{{ user.userprofile.resume.url }}" target="_blank" class="text-blue-600 hover:underline">
+                {{user.userprofile.resume}}
+              </a>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Employer Company Details -->
+      {% if user.userprofile.role == 'employer' %}
+        <div class="mt-10 border-t pt-6">
+          <h3 class="text-xl font-bold text-gray-800 mb-4">Company Information</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700 text-sm">
+            <div><span class="font-bold text-indigo-800">Company Name:</span> {{ user.userprofile.company_name }}</div>
+            <div><span class="font-bold text-indigo-800">Company Email:</span> {{ user.userprofile.company_email }}</div>
+            <div><span class="font-bold text-indigo-800">Contact Number:</span> {{ user.userprofile.company_contact }}</div>
+            <div><span class="font-bold text-indigo-800">Location:</span> {{ user.userprofile.company_location }}</div>
+            <div class="md:col-span-2">
+              <span class="font-bold text-indigo-800">Website:</span>
+              <a href="{{ user.userprofile.company_website }}" target="_blank" class="text-blue-600 hover:underline">
+                {{ user.userprofile.company_website|default:"N/A" }}
+              </a>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<!-- Dropdown Script -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const button = document.getElementById('menu-button');
+    const menu = document.getElementById('dropdown-menu');
+
+    button.addEventListener('click', function (e) {
+      e.stopPropagation();
+      menu.classList.toggle('hidden');
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!document.getElementById('dropdown-container').contains(e.target)) {
+        menu.classList.add('hidden');
+      }
+    });
+  });
+</script>
+{% endblock %}

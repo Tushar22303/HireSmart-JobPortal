@@ -12,8 +12,10 @@
 <section class="bg-gradient-to-br from-gray-100 to-gray-400 min-h-screen py-14 px-4">
   <div class="max-w-5xl mx-auto bg-white shadow-2xl rounded-3xl p-10 relative">
 
-    <!-- Header: Title + Type -->
-    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+    <a href="{% url "browse_jobs" %}" class='text-blue-700 underline'><i class="fa-solid fa-arrow-left"></i> Back</a>
+
+    <!-- Header: Title + Type + Website-->
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6 mt-3">
       <div>
         <h1 class="text-3xl md:text-4xl font-bold text-gray-800">{{ job.job_title }}</h1>
         <p class="text-lg text-gray-600 mt-1 mb-2">{{ job.company_name }} — {{ job.job_location }}</p>
@@ -63,7 +65,7 @@
     {% if request.user.userprofile.role == "job_seeker" %}
     <div class="text-center">
       <a href="#"
-         class="inline-block bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white font-semibold text-lg px-6 py-3 rounded-full shadow-lg transition-all duration-300">
+         class="inline-block dark:bg-gray-900 hover:bg-gray-700 text-white font-semibold text-lg px-6 py-3 rounded-full shadow-lg transition-all duration-300">
         Apply Now
       </a>
     </div>

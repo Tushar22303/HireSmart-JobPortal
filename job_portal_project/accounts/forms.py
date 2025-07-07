@@ -40,3 +40,51 @@ class CustomUserRegistrationForm(UserCreationForm):
             cleaned_data['company_website'] = ''
 
         return cleaned_data
+    
+
+# -----------------------------------
+# Additional Data Form
+# -----------------------------------
+class AdditionalDataForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+            user = kwargs.pop('user', None)
+            super(AdditionalDataForm, self).__init__(*args, **kwargs)
+
+            if user and user.userprofile.role != 'job_seeker':
+                self.fields.pop('resume')
+                
+    class Meta:
+        model = UserProfile
+        fields = ['profile_picture', 'resume', 'contact_number', 'bio']
+        widgets = {
+            'bio': forms.Textarea(attrs={'rows':3}),
+        }
+
+        
+# -----------------------------------
+# Edit User Code Info
+# -----------------------------------
+class EditUserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email']
+
+
+# -----------------------------------
+# Edit UserProfile 
+# -----------------------------------
+class EditProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        exclude = ['user', 'role', 'profile_picture', 'resume']
+        widgets = {
+            'bio': forms.Textarea(attrs={'rows':3}),
+        }
+
+
+# -----------------------------------
+# Delete Account Confirmation
+# -----------------------------------
+class DeleteAccountForm(forms.Form):
+    confirmation_text = forms.CharField(label='Type DELETE to confirm deletion', max_length=20)
+    captcha_answer = forms.IntegerField(label="What is (15 - 5) / 2 ?")
