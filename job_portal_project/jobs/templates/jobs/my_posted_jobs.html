@@ -13,9 +13,14 @@
         <h1 class="text-4xl font-extrabold text-gray-900">Your Job Postings</h1>
         <p class="text-sm text-gray-600 mt-1">Manage and view all your posted jobs in one place.</p>
       </div>
-      <a href="{% url 'post_jobs' %}" class="inline-block bg-gray-900 hover:bg-gray-700 text-white px-6 py-2 rounded-lg shadow-lg font-medium transition-all">
-        + Post New Job
-      </a>
+      <div class='space-x-1'>
+        <a href="{% url 'post_jobs' %}" class="inline-block bg-gray-900 hover:bg-gray-700 text-white px-6 py-2 rounded-lg shadow-lg font-medium transition-all">
+          + Post New Job
+        </a>
+        <a href="{% url "view_applicants" %}" class="inline-block bg-gray-900 hover:bg-gray-700 text-white px-3 py-2 rounded-full shadow-lg font-medium transition-all">
+          <i class="fa-solid fa-bell"></i>
+        </a>
+      </div>
     </div>
 
     {% if my_jobs %}

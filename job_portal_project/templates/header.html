@@ -22,7 +22,7 @@
             <a href="{% url "post_jobs" %}" class="text-gray-700 dark:text-gray-300 hover:underline">Post Jobs</a>
             <a href="{% url "my_posted_jobs" %}" class="text-gray-700 dark:text-gray-300 hover:underline">My Posted Jobs</a>
           {% elif user.userprofile.role == 'job_seeker' %}  
-            <a href="#" class="text-gray-700 dark:text-gray-300 hover:underline">Applied Jobs</a>
+            <a href="{% url "applied_jobs" %}" class="text-gray-700 dark:text-gray-300 hover:underline">Applied Jobs</a>
           {% endif %}
           <a href="{% url "profile_view" %}" class="text-gray-300 border-2 px-2 py-1 rounded-full">
             <i class="fa-solid fa-user"></i>

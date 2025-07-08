@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}HireSmart - My Applied Jobs{% endblock %}
+
+{% block navbar %}
+    {% include "header.html" %}
+{% endblock %}
+
+{% block content %}
+<section class='min-h-screen bg-gradient-to-br from-gray-300 via-gray-500 to-gray-700 pt-6'>
+    <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6">My Applied Jobs</h2>
+
+        {% if applied_jobs %}
+            <div class="overflow-x-auto bg-white rounded-xl shadow-md border border-gray-200">
+                <table class="min-w-full divide-y divide-gray-200 text-sm">
+                    <thead class="bg-gray-100 text-gray-700 text-left">
+                        <tr>
+                            <th class="px-6 py-3">#</th>
+                            <th class="px-6 py-3">Job Title</th>
+                            <th class="px-6 py-3">Company</th>
+                            <th class="px-6 py-3">Location</th>
+                            <th class="px-6 py-3">Type</th>
+                            <th class="px-6 py-3">Applied At</th>
+                            <th class="px-6 py-3">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100 text-gray-700">
+                        {% for application in applied_jobs %}
+                            <tr class="hover:bg-gray-50 transition">
+                                <td class="px-6 py-4">{{ forloop.counter }}</td>
+                                <td class="px-6 py-4 font-medium">
+                                    {{ application.job.job_title }}
+                                </td>
+                                <td class="px-6 py-4">{{ application.job.company_name }}</td>
+                                <td class="px-6 py-4">{{ application.job.job_location }}</td>
+                                <td class="px-6 py-4 capitalize">{{ application.job.job_type}}</td>
+                                <td class="px-6 py-4">{{ application.applied_at|date:"M d, Y" }}</td>
+                                <td class="px-6 py-4 capitalize">
+                                    <span class="inline-block px-2 py-1 text-xs font-semibold rounded-full 
+                                    {% if application.status == 'pending' %} bg-yellow-100 text-yellow-800 
+                                    {% elif application.status == 'shortlisted' %} bg-green-100 text-green-800 
+                                    {% elif application.status == 'rejected' %} bg-red-100 text-red-800 
+                                    {% else %} bg-gray-100 text-gray-600 {% endif %}">
+                                        {{ application.status }}
+                                    </span>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p class="text-gray-600 mt-4">You haven’t applied to any jobs yet.</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

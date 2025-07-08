@@ -63,13 +63,23 @@
 
     <!-- Apply Button -->
     {% if request.user.userprofile.role == "job_seeker" %}
-    <div class="text-center">
-      <a href="#"
-         class="inline-block dark:bg-gray-900 hover:bg-gray-700 text-white font-semibold text-lg px-6 py-3 rounded-full shadow-lg transition-all duration-300">
-        Apply Now
-      </a>
-    </div>
+        {% if already_applied %}
+            <div class="text-center">
+                <button disabled
+                  class="inline-block dark:bg-gray-600 text-white font-semibold text-lg px-6 py-3 rounded-full shadow-lg transition-all duration-300">
+                  ✅ Applied
+                </button>
+            </div>
+        {% else %}
+            <div class="text-center">
+                <a href="{% url "apply_to_jobs" job.id %}"
+                  class="inline-block dark:bg-gray-900 hover:bg-gray-700 text-white font-semibold text-lg px-6 py-3 rounded-full shadow-lg transition-all duration-300">
+                  Apply Now
+                </a>
+            </div>
+        {% endif %}
     {% endif %}
+
 
   </div>
 </section>
