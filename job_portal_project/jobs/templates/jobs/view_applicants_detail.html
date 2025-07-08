@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}HireSmart - Applicant Detail{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto mt-10 p-8 bg-gray-100 rounded-2xl shadow-lg border border-gray-200">
+    <div class="flex items-center justify-between mb-6 border-b">
+        <h2 class="text-3xl font-semibold text-gray-800  pb-2">Applicant Overview</h2>
+        <a href="{% url "view_applicants" %}" class='text-blue-800 underline'>Back</a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-700">
+        <div>
+            <p class="mb-1"><span class="font-semibold">Name:</span> {{ application.job_seeker.get_full_name }}</p>
+            <p class="mb-1"><span class="font-semibold">Email:</span> {{ application.job_seeker.email }}</p>
+            <p class="mb-1"><span class="font-semibold">Contact:</span> {{ application.job_seeker.userprofile.contact_number }}</p>
+            {% if application.job_seeker.userprofile.resume %}
+                <p class="mb-1">
+                    <span class="font-semibold">Resume:</span>
+                    <a href="{{ application.job_seeker.userprofile.resume.url }}" target="_blank" class="text-blue-600 hover:text-blue-800 underline">Download Resume</a>
+                </p>
+            {% endif %}
+        </div>
+        <div>
+            <p class="mb-1"><span class="font-semibold">Job Title:</span> {{ application.job.job_title }}</p>
+            <p class="mb-1"><span class="font-semibold">Message:</span> <br>
+                {% if application.message %}
+                    {{ application.message }}
+                {% else %}
+                    <span class="italic text-gray-400">No message provided</span>
+                {% endif %}
+            </p>
+        </div>
+    </div>
+
+    <form method="post" class="mt-8">
+        {% csrf_token %}
+        <label for="status" class="block mb-2 text-lg font-medium text-gray-800">Update Application Status</label>
+        <select name="status" id="status" class="w-full md:w-1/2 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+            {% for key, value in status_choices %}
+                <option value="{{ key }}" {% if key == application.status %}selected{% endif %}>{{ value }}</option>
+            {% endfor %}
+        </select>
+
+        <div class="mt-6">
+            <button type="submit" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition duration-200">
+                Update Status
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

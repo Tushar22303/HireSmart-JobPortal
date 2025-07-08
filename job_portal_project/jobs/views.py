@@ -24,7 +24,7 @@ def post_jobs(request):
             return redirect('browse_jobs')
     else:
         form = Post_Job_Form()
-    return render(request, 'jobs/post_jobs.html', {'form': form})
+    return render(request, 'jobs/post_jobs.html', {'form': form, "is_edit": False})
 
 
 # ===============================================================
@@ -38,6 +38,41 @@ def my_posted_jobs(request):
     my_jobs = Jobs.objects.filter(employer=request.user).order_by('-posted_at')
     return render(request, 'jobs/my_posted_jobs.html', {'my_jobs':my_jobs})
 
+
+# ===============================================================
+# Edit the Job Post -> Employer Side -> Employer can edit the job post details
+# ===============================================================
+@login_required
+def edit_job_details(request, job_id):
+    job = get_object_or_404(Jobs, id=job_id)
+
+    if request.user != job.employer:
+        return HttpResponseForbidden("You are not able to edit the post")
+    
+    if request.method == "POST":
+        form = Post_Job_Form(request.POST, instance=job)
+        if form.is_valid():
+            form.save()
+            return redirect('my_posted_jobs')
+    else:
+        form = Post_Job_Form(instance=job)
+    return render(request, 'jobs/post_jobs.html', {'form':form, 'job':job, "is_edit": True})
+
+
+# ===============================================================
+# Delete Job Post -> Employer Side -> Employer can delete the job post details
+# ===============================================================
+@login_required
+def delete_job_details(request, job_id):
+    job = get_object_or_404(Jobs, id=job_id)
+
+    if request.user != job.employer:
+        return HttpResponseForbidden("You are not able to edit the post")
+    
+    if request.method == "POST":
+        job.delete()
+        return redirect('my_posted_jobs')
+    
 
 
 # ===============================================================
@@ -101,7 +136,7 @@ def apply_to_jobs(request, job_id):
 
     if already_applied:
         messages.info(request, "You already have applied to the job")
-        return redirect('job_details', job_id=job.id)
+        return redirect('job_details', job_id=job_id)
     
     if request.method == "POST":
         message = request.POST.get('message', '')
@@ -112,7 +147,7 @@ def apply_to_jobs(request, job_id):
             message=message
         )
         messages.success(request, "You have successfully applied to the job")
-        return redirect('job_details', job_id=job.id)
+        return redirect('job_details', job_id=job_id)
     
     return render(request, 'jobs/apply_to_jobs.html', {'job':job, 'already_applied':already_applied})
 
@@ -130,6 +165,16 @@ def applied_jobs(request):
 
 
 # ===============================================================
+# Withdraw job Application -> Job seeker side -> can delete their application
+# ===============================================================
+@login_required
+def withdraw_application(request, application_id):
+    application = get_object_or_404(JobApplication, id=application_id, job_seeker=request.user)
+    application.delete()
+    return redirect('applied_jobs')
+
+
+# ===============================================================
 # View applicants -> Only Employer can see the applicants who applied for job
 # ===============================================================
 @login_required
@@ -144,3 +189,44 @@ def view_applicants(request):
     applications = JobApplication.objects.filter(job__in=employer_jobs).select_related('job', 'job_seeker__userprofile')
 
     return render(request, 'jobs/view_applicants.html', {'applications': applications})
+
+
+# ===============================================================
+# View Applicants Detail -> Employer Side -> Employer can see the application full detail
+# ===============================================================
+@login_required
+def view_applicants_detail(request, app_id):
+    application = get_object_or_404(JobApplication, id=app_id)
+
+    # Ensure the Employer owns the job
+    if application.job.employer != request.user:
+        return HttpResponseForbidden("You are not authorized to view this application.")
+    
+    if request.method == "POST":
+        new_status = request.POST.get('status')
+        if new_status in dict(JobApplication.STATUS_CHOICE).keys():
+            application.status = new_status
+            application.save()
+            return redirect('view_applicants')
+
+    context = {
+        'application': application,
+        'status_choices': JobApplication.STATUS_CHOICE,
+    }
+
+    return render(request, 'jobs/view_applicants_detail.html', context)
+
+
+# ===============================================================
+# Delete Application -> Employer Side -> Employer can delete the application, if they want to be
+# ===============================================================
+@login_required
+def delete_application(request, app_id):
+    application = get_object_or_404(JobApplication, id=app_id)
+
+    # Ensure the Employer owns the job
+    if application.job.employer != request.user:
+        return HttpResponseForbidden("You are not authorized to view this application.")
+    
+    application.delete()
+    return redirect('view_applicants')
