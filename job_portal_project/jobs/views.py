@@ -144,7 +144,8 @@ def apply_to_jobs(request, job_id):
             job=job, 
             job_seeker=request.user,
             applied_at=timezone.now(),
-            message=message
+            message=message, 
+            seen_by_employer=False,
         )
         messages.success(request, "You have successfully applied to the job")
         return redirect('job_details', job_id=job_id)
@@ -201,6 +202,10 @@ def view_applicants_detail(request, app_id):
     # Ensure the Employer owns the job
     if application.job.employer != request.user:
         return HttpResponseForbidden("You are not authorized to view this application.")
+    
+    if not application.seen_by_employer:
+        application.seen_by_employer = True
+        application.save()
     
     if request.method == "POST":
         new_status = request.POST.get('status')

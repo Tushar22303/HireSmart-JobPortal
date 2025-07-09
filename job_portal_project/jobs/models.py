@@ -38,6 +38,7 @@ class JobApplication(models.Model):
     job = models.ForeignKey(Jobs, on_delete=models.CASCADE, related_name='applications')
     job_seeker = models.ForeignKey(User, on_delete=models.CASCADE, related_name='job_applications')
     applied_at = models.DateTimeField(auto_now_add=True)
+    seen_by_employer = models.BooleanField(default=False)
 
     # Optional for message
     message = models.TextField(blank=True, null=True)

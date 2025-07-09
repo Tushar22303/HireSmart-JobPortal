@@ -17,8 +17,14 @@
         <a href="{% url 'post_jobs' %}" class="inline-block bg-gray-900 hover:bg-gray-700 text-white px-6 py-2 rounded-lg shadow-lg font-medium transition-all">
           + Post New Job
         </a>
-        <a href="{% url "view_applicants" %}" class="inline-block bg-gray-900 hover:bg-gray-700 text-white px-3 py-2 rounded-full shadow-lg font-medium transition-all">
+
+        <a href="{% url "view_applicants" %}" class="inline-block bg-gray-900 hover:bg-gray-700 text-white px-3 py-2 rounded-full shadow-lg font-medium transition-all relative">
           <i class="fa-solid fa-bell"></i>
+          {% if notification_count > 0 %}
+            <span class="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold rounded-full px-1.5">
+              {{ notification_count }}
+            </span>
+          {% endif %}
         </a>
       </div>
     </div>
